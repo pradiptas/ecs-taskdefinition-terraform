@@ -5,32 +5,32 @@ orbs:
   aws-ecr: circleci/aws-ecr@7.2.0
 
 workflows:
-  # deploy_infrastructure:  #create an ECR Repository
-  #   jobs:
-  #     - terraform/validate:
-  #         checkout: true
-  #         context: terraform
-  #         path: ./infra
-  #     - terraform/plan:
-  #         checkout: true
-  #         context: terraform
-  #         path: ./infra
-  #         persist-workspace: true
-  #         requires:
-  #           - terraform/validate
-  #     - review-terraform:
-  #         type: approval
-  #         requires:
-  #           - terraform/plan
-  #     - terraform/apply:
-  #         attach-workspace: true
-  #         context: terraform
-  #         path: ./infra
-  #         filters:
-  #           branches:
-  #             only: main
-  #         requires:
-  #           - review-terraform
+  deploy_infrastructure:  
+    jobs:
+      - terraform/validate:
+          checkout: true
+          context: terraform
+          path: ./infra
+      - terraform/plan:
+          checkout: true
+          context: terraform
+          path: ./infra
+          persist-workspace: true
+          requires:
+            - terraform/validate
+      - review-terraform:
+          type: approval
+          requires:
+            - terraform/plan
+      - terraform/apply:
+          attach-workspace: true
+          context: terraform
+          path: ./infra
+          filters:
+            branches:
+              only: main
+          requires:
+            - review-terraform
   build_and_push_image:   #build and push image to ECR
     jobs:
       - aws-ecr/build-and-push-image:
@@ -43,3 +43,5 @@ workflows:
           region: AWS_REGION
           repo: ecr-devops-pradipta
           tag: 'latest,1.0.0.${CIRCLE_BUILD_NUM}'
+
+  
