@@ -15,9 +15,9 @@ provider "aws" {
   region = "us-west-2"
 }
 
-# resource "aws_ecr_repository" "ecr-devops-pradipta" {
-#   name   = "ecr-devops-pradipta"
-# }
+resource "aws_ecr_repository" "ecr-devops-pradipta" {
+  name   = "ecr-devops-pradipta"
+}
 
 
 resource "aws_ecs_task_definition" "ecs-devops-task" {
