@@ -1,0 +1,39 @@
+#### Build and Push the image to ECR ###
+version: 2.1
+orbs:
+  aws-ecr: circleci/aws-ecr@7.2.0
+  terraform: circleci/terraform@3.0.0
+
+workflows:
+  deploy_infrastructure:  #create an ECR Repository
+    jobs:
+      - terraform/fmt:
+          checkout: true
+          context: terraform
+          path: ./infra
+      - terraform/validate:
+          checkout: true
+          context: terraform
+          path: ./infra
+          requires:
+            - terraform/fmt
+      - terraform/plan:
+          checkout: true
+          context: terraform
+          path: ./infra
+          persist-workspace: true
+          requires:
+            - terraform/validate
+      - review-terraform:
+          type: approval
+          requires:
+            - terraform/plan
+      - terraform/apply:
+          attach-workspace: true
+          context: terraform
+          path: ./infra
+          filters:
+            branches:
+              only: main
+          requires:
+            - review-terraform
