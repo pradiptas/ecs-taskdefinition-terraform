@@ -16,6 +16,7 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "aws_ecr_repository" "ecr-repo-devops-poc-pradipta" {
-  name = "ecr-repo-devops-poc-pradipta" 
+resource "aws_ecr_repository" "ecr_devops_poc_pradipta" {
+  
+  name = "ecr-devops-poc-pradipta"
 }
