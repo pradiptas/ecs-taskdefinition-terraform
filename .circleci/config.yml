@@ -6,16 +6,16 @@ orbs:
 workflows:
   deploy_infrastructure:  #create an ECR Repository
     jobs:
-      - terraform/fmt:
-          checkout: true
-          context: terraform
-          path: ./infra
+      # - terraform/fmt:
+      #     checkout: true
+      #     context: terraform
+      #     path: ./infra
       - terraform/validate:
           checkout: true
           context: terraform
           path: ./infra
-          requires:
-            - terraform/fmt
+          # requires:
+          #   - terraform/fmt
       - terraform/plan:
           checkout: true
           context: terraform
