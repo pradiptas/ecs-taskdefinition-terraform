@@ -41,5 +41,4 @@ workflows:
           dockerfile: Dockerfile
           path: .
           region: AWS_REGION
-          repo: ecr-devops-pradipta
           tag: 'latest,1.0.0.${CIRCLE_BUILD_NUM}'
