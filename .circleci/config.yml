@@ -34,12 +34,12 @@ workflows:
   build_and_push_image:   #build and push image to ECR
     jobs:
       - aws-ecr/build-and-push-image:
-          account-url: 272603463567.dkr.ecr.us-west-2.amazonaws.com/ecr-devops-pradipta
+          account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           create-repo: true
           dockerfile: Dockerfile
           path: .
-          region: us-west-2
+          region: AWS_REGION
           repo: ecr-devops-pradipta
           tag: 'latest,1.0.0.${CIRCLE_BUILD_NUM}'
