@@ -17,6 +17,5 @@ provider "aws" {
 }
 
 resource "aws_ecr_repository" "ecr_devops_poc_pradipta" {
-  
-  name = "ecr-devops-poc-pradipta"
+  name   = "ecr-devops-poc-pradipta"
 }
