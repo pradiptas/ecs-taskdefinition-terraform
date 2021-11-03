@@ -79,7 +79,7 @@ resource "aws_ecs_service" "ecs-devops-service" {
 
   load_balancer {
     target_group_arn = "${aws_lb_target_group.target_group.arn}" # Referencing our target group
-    container_name   = "${aws_ecs_task_definition.my_first_task.family}"
+    container_name   = "${aws_ecs_task_definition.ecs-devops-task.family}"
     container_port   = 3000 # Specifying the container port
   }
 
